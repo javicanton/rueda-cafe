@@ -1,0 +1,10 @@
+{
+    "title": "Coffee Flavor Wheel",
+    "subtitle": "Click an arc to view its card. Double-click to center/zoom.",
+    "legend": "Interaction: <b>click</b> view card · <b>double-click</b> zoom",
+    "searchPlaceholder": "Search descriptor… (e.g., ‘citrus’, ‘honey’)",
+    "results": "Results",
+    "selectPrompt": "Select a descriptor",
+    "defPlaceholder": "Definition and sensory references will appear here.",
+    "langLabel": "Language:"
+  }

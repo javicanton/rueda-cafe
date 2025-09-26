@@ -1,0 +1,141 @@
+{
+    "name": "Coffee flavors",
+    "children": [
+      {
+        "name": "Sweet aromas",
+        "color": "#f59e0b",
+        "children": [
+          { "name": "White sugar", "def": "Clean, straightforward sweetness without toasted notes.", "refs": ["Granulated sugar"] },
+          { "name": "Brown sugar", "def": "Sweetness with a light molasses hint.", "refs": ["Cane sugar"] },
+          { "name": "Caramel", "def": "Caramelized sugar; sweet with toasted edges.", "refs": ["Soft caramel"] },
+          { "name": "Honey", "def": "Floral, viscous, rounded sweetness.", "refs": ["Multifloral honey"] },
+          { "name": "Molasses", "def": "Dark, dense sweetness with cane notes.", "refs": ["Cane syrup"] },
+          { "name": "Vanilla", "def": "Sweet aromatic, creamy, gently spicy.", "refs": ["Vanilla pod"] }
+        ]
+      },
+      {
+        "name": "Fruity",
+        "color": "#10b981",
+        "children": [
+          {
+            "name": "Citrus",
+            "color": "#34d399",
+            "children": [
+              { "name": "Lemon", "def": "Bright, sparkling, clean acidity.", "refs": ["Lemon juice"] },
+              { "name": "Orange", "def": "Round, sweet citrus with softer bite.", "refs": ["Ripe orange"] },
+              { "name": "Mandarin", "def": "Delicate sweet citrus, fragrant finish.", "refs": ["Mandarin segments"] },
+              { "name": "Grapefruit", "def": "Citrus with subtle bitterness and dry finish.", "refs": ["Pink grapefruit"] }
+            ]
+          },
+          {
+            "name": "Red fruits",
+            "color": "#22c55e",
+            "children": [
+              { "name": "Strawberry", "def": "Gentle, juicy red-fruit sweetness.", "refs": ["Ripe strawberries"] },
+              { "name": "Raspberry", "def": "Lively sweet-tart with intense aroma.", "refs": ["Fresh raspberries"] },
+              { "name": "Cherry", "def": "Clean red fruit with light acidity.", "refs": ["Cherries"] },
+              { "name": "Blackberry", "def": "Dark fruit, sweet with medium acidity.", "refs": ["Wild blackberries"] }
+            ]
+          },
+          {
+            "name": "Stone fruits",
+            "color": "#16a34a",
+            "children": [
+              { "name": "Peach", "def": "Juicy, perfumed sweetness.", "refs": ["Canned peaches"] },
+              { "name": "Apricot", "def": "Soft sweet-tart with floral hint.", "refs": ["Ripe apricot"] },
+              { "name": "Plum", "def": "Sweet fruit with slightly winy finish.", "refs": ["Purple plums"] }
+            ]
+          },
+          {
+            "name": "Tropical",
+            "color": "#0ea5e9",
+            "children": [
+              { "name": "Pineapple", "def": "Bright juicy sweet-tart.", "refs": ["Fresh pineapple"] },
+              { "name": "Mango", "def": "Dense, exotic, creamy sweetness.", "refs": ["Ripe mango"] },
+              { "name": "Passion fruit", "def": "Intense, aromatic acidity with candy-like appeal.", "refs": ["Passion fruit pulp"] }
+            ]
+          },
+          {
+            "name": "Dried fruits",
+            "color": "#06b6d4",
+            "children": [
+              { "name": "Raisin", "def": "Concentrated sweetness with winy undertone.", "refs": ["Sultanas"] },
+              { "name": "Dried fig", "def": "Deep, syrupy, resinous sweetness.", "refs": ["Dried figs"] },
+              { "name": "Date", "def": "Very sweet, dense, caramel-like.", "refs": ["Medjool dates"] }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Floral/Herbal",
+        "color": "#8b5cf6",
+        "children": [
+          { "name": "Jasmine", "def": "Light floral, perfumed and airy.", "refs": ["Jasmine tea"] },
+          { "name": "Rose", "def": "Sweet, intense floral, perfumed.", "refs": ["Rose water"] },
+          { "name": "Lavender", "def": "Fresh floral with herbal edge.", "refs": ["Lavender flowers"] },
+          { "name": "Chamomile", "def": "Soft herbal, sweet, calming.", "refs": ["Chamomile infusion"] },
+          { "name": "Fresh grass", "def": "Green notes of freshly cut lawn.", "refs": ["Cut grass"] }
+        ]
+      },
+      {
+        "name": "Spices",
+        "color": "#ef4444",
+        "children": [
+          { "name": "Cinnamon", "def": "Warm, sweet, spicy.", "refs": ["Cinnamon stick"] },
+          { "name": "Clove", "def": "Aromatic heat, intense and balsamic.", "refs": ["Clove buds"] },
+          { "name": "Nutmeg", "def": "Sweet spicy with earthy hint.", "refs": ["Freshly grated nutmeg"] },
+          { "name": "Black pepper", "def": "Dry heat, warm, penetrating.", "refs": ["Freshly ground pepper"] },
+          { "name": "Cardamom", "def": "Citrusy spice, fresh and perfumed.", "refs": ["Cardamom pods"] }
+        ]
+      },
+      {
+        "name": "Nuts / Cocoa",
+        "color": "#a855f7",
+        "children": [
+          { "name": "Hazelnut", "def": "Soft toasted, buttery.", "refs": ["Toasted hazelnuts"] },
+          { "name": "Almond", "def": "Dry, clean, delicate sweetness.", "refs": ["Raw almond"] },
+          { "name": "Walnut", "def": "Earthy toasted with slight bitterness.", "refs": ["Shelled walnut"] },
+          { "name": "Cocoa", "def": "Bittersweet, powdery, chocolate-like.", "refs": ["Cocoa powder"] },
+          { "name": "Chocolate", "def": "Rounded and creamy; milk to dark.", "refs": ["70% dark chocolate"] }
+        ]
+      },
+      {
+        "name": "Roasted / Sugary",
+        "color": "#fb7185",
+        "children": [
+          { "name": "Malt", "def": "Sweet roasted cereal, bready.", "refs": ["Toasted malt"] },
+          { "name": "Toast", "def": "Crisp roasted cereal, dry.", "refs": ["Toasted bread slice"] },
+          { "name": "Burnt sugar", "def": "Intense roast with bitter finish.", "refs": ["Dark caramel"] }
+        ]
+      },
+      {
+        "name": "Green / Vegetal",
+        "color": "#22c55e",
+        "children": [
+          { "name": "Green chili", "def": "Fresh vegetal heat.", "refs": ["Green chili pepper"] },
+          { "name": "Pea", "def": "Sweet green with slight earthiness.", "refs": ["Fresh peas"] },
+          { "name": "Green pepper", "def": "Crunchy vegetal, marked herbal note.", "refs": ["Green bell/Italian pepper"] },
+          { "name": "Tomato", "def": "Juicy vegetal acidity.", "refs": ["Ripe tomato"] }
+        ]
+      },
+      {
+        "name": "Fermented / Winy",
+        "color": "#06b6d4",
+        "children": [
+          { "name": "Grape", "def": "Fresh fruit with soft winy edge.", "refs": ["White grape"] },
+          { "name": "Red wine", "def": "Tannic, red fruits, woody hints.", "refs": ["Young red wine"] },
+          { "name": "Cider", "def": "Fermented apple, lively acidity.", "refs": ["Natural cider"] }
+        ]
+      },
+      {
+        "name": "Other / Off-notes",
+        "color": "#64748b",
+        "children": [
+          { "name": "Smoky", "def": "Smoke, ember, or noticeable ash.", "refs": ["Smoked nut"] },
+          { "name": "Burnt", "def": "Charred, aggressive bitter dryness.", "refs": ["Burnt toast"] },
+          { "name": "Rubber", "def": "Rubbery, slight sulfur; heavy feel.", "refs": ["Rubber band"] },
+          { "name": "Paper/cardboard", "def": "Dry, flat, cellulosic.", "refs": ["Cardboard"] }
+        ]
+      }
+    ]
+  }

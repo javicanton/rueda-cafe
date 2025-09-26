@@ -1,0 +1,141 @@
+{
+    "name": "Sabores del café",
+    "children": [
+      {
+        "name": "Aromas dulces",
+        "color": "#f59e0b",
+        "children": [
+          { "name": "Azúcar blanco", "def": "Dulzor limpio y directo, sin notas tostadas.", "refs": ["Azúcar granulado"] },
+          { "name": "Azúcar moreno", "def": "Dulzor con leve toque a melaza.", "refs": ["Azúcar de caña"] },
+          { "name": "Caramelo", "def": "Recuerda al azúcar caramelizado; dulce con notas tostadas.", "refs": ["Caramelo blando"] },
+          { "name": "Miel", "def": "Dulzor floral, viscoso, redondo.", "refs": ["Miel multifloral"] },
+          { "name": "Melaza", "def": "Dulzor oscuro y denso con notas a caña.", "refs": ["Sirope de caña"] },
+          { "name": "Vainilla", "def": "Dulce aromático, cremoso, especiado suave.", "refs": ["Vaina de vainilla"] }
+        ]
+      },
+      {
+        "name": "Frutales",
+        "color": "#10b981",
+        "children": [
+          {
+            "name": "Cítricos",
+            "color": "#34d399",
+            "children": [
+              { "name": "Limón", "def": "Acidez brillante, chispeante y limpia.", "refs": ["Zumo de limón"] },
+              { "name": "Naranja", "def": "Cítrico dulce y redondo, menos punzante.", "refs": ["Naranja madura"] },
+              { "name": "Mandarina", "def": "Cítrico delicado, dulce, con final fragante.", "refs": ["Gajos de mandarina"] },
+              { "name": "Pomelo", "def": "Cítrico con amargor sutil y final seco.", "refs": ["Pomelo rosa"] }
+            ]
+          },
+          {
+            "name": "Frutas rojas",
+            "color": "#22c55e",
+            "children": [
+              { "name": "Fresa", "def": "Dulzor frutal suave, jugoso.", "refs": ["Fresas maduras"] },
+              { "name": "Frambuesa", "def": "Dulce-ácido vibrante con aroma intenso.", "refs": ["Frambuesa fresca"] },
+              { "name": "Cereza", "def": "Frutal rojo y limpio, con ligera acidez.", "refs": ["Cerezas"] },
+              { "name": "Mora", "def": "Fruta oscura, dulce con acidez media.", "refs": ["Moras silvestres"] }
+            ]
+          },
+          {
+            "name": "Frutas de hueso",
+            "color": "#16a34a",
+            "children": [
+              { "name": "Melocotón", "def": "Dulzor jugoso y perfumado.", "refs": ["Melocotón en almíbar"] },
+              { "name": "Albaricoque", "def": "Dulce-ácido suave con toque floral.", "refs": ["Albaricoque maduro"] },
+              { "name": "Ciruela", "def": "Frutal dulce con final ligeramente vinoso.", "refs": ["Ciruelas moradas"] }
+            ]
+          },
+          {
+            "name": "Frutas tropicales",
+            "color": "#0ea5e9",
+            "children": [
+              { "name": "Piña", "def": "Dulce-ácida brillante, jugosa.", "refs": ["Piña fresca"] },
+              { "name": "Mango", "def": "Dulzor denso y exótico, cremoso.", "refs": ["Mango maduro"] },
+              { "name": "Maracuyá", "def": "Acidez intensa, aromática y golosa.", "refs": ["Pulpa de maracuyá"] }
+            ]
+          },
+          {
+            "name": "Frutas secas",
+            "color": "#06b6d4",
+            "children": [
+              { "name": "Uva pasa", "def": "Dulzor concentrado con matiz vinoso.", "refs": ["Pasas sultanas"] },
+              { "name": "Higo seco", "def": "Dulzor profundo, meloso y resinoso.", "refs": ["Higos secos"] },
+              { "name": "Dátil", "def": "Muy dulce, denso y caramelizado.", "refs": ["Dátiles Medjool"] }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Floral/Herbal",
+        "color": "#8b5cf6",
+        "children": [
+          { "name": "Jazmín", "def": "Aroma floral ligero, perfumado y etéreo.", "refs": ["Té jazmín"] },
+          { "name": "Rosa", "def": "Floral dulce e intenso, perfumado.", "refs": ["Agua de rosas"] },
+          { "name": "Lavanda", "def": "Floral fresco con matiz herbal.", "refs": ["Flores de lavanda"] },
+          { "name": "Manzanilla", "def": "Herbal suave, dulce y calmante.", "refs": ["Infusión de manzanilla"] },
+          { "name": "Hierba fresca", "def": "Notas verdes a pasto recién cortado.", "refs": ["Césped recién cortado"] }
+        ]
+      },
+      {
+        "name": "Especias",
+        "color": "#ef4444",
+        "children": [
+          { "name": "Canela", "def": "Cálido, dulce y especiado.", "refs": ["Canela en rama"] },
+          { "name": "Clavo", "def": "Picante aromático, intenso y balsámico.", "refs": ["Clavo de olor"] },
+          { "name": "Nuez moscada", "def": "Dulce especiado con toque terroso.", "refs": ["Nuez moscada rallada"] },
+          { "name": "Pimienta negra", "def": "Picor seco, cálido, penetrante.", "refs": ["Pimienta recién molida"] },
+          { "name": "Cardamomo", "def": "Especiado cítrico, fresco y perfumado.", "refs": ["Vainas de cardamomo"] }
+        ]
+      },
+      {
+        "name": "Frutos secos / Cacao",
+        "color": "#a855f7",
+        "children": [
+          { "name": "Avellana", "def": "Tostado suave, mantecoso.", "refs": ["Avellanas tostadas"] },
+          { "name": "Almendra", "def": "Dulzor seco, limpio y delicado.", "refs": ["Almendra cruda"] },
+          { "name": "Nuez", "def": "Tostado terroso, leve amargor.", "refs": ["Nuez pelada"] },
+          { "name": "Cacao", "def": "Amargo dulce, polvoroso, achocolatado.", "refs": ["Cacao en polvo"] },
+          { "name": "Chocolate", "def": "Redondo y cremoso; puede ir de leche a negro.", "refs": ["Chocolate 70%"] }
+        ]
+      },
+      {
+        "name": "Tostados / Azucarados",
+        "color": "#fb7185",
+        "children": [
+          { "name": "Malta", "def": "Cereal tostado dulce, panificado.", "refs": ["Malta tostada"] },
+          { "name": "Pan tostado", "def": "Cereal tostado crujiente, seco.", "refs": ["Rebanada tostada"] },
+          { "name": "Azúcar quemado", "def": "Tostado intenso con toque amargo final.", "refs": ["Caramelo oscuro"] }
+        ]
+      },
+      {
+        "name": "Verde / Vegetal",
+        "color": "#22c55e",
+        "children": [
+          { "name": "Guindilla verde", "def": "Picante vegetal fresco.", "refs": ["Chile verde"] },
+          { "name": "Guisante", "def": "Verde dulce, ligeramente terroso.", "refs": ["Guisantes tiernos"] },
+          { "name": "Pimiento verde", "def": "Vegetal crujiente, herbal marcado.", "refs": ["Pimiento italiano"] },
+          { "name": "Tomate", "def": "Acidez vegetal jugosa.", "refs": ["Tomate maduro"] }
+        ]
+      },
+      {
+        "name": "Fermento / Vinoso",
+        "color": "#06b6d4",
+        "children": [
+          { "name": "Uva", "def": "Frutal fresco con matiz vinoso suave.", "refs": ["Uva blanca"] },
+          { "name": "Vino tinto", "def": "Notas tánicas, frutos rojos y madera.", "refs": ["Copa de tinto joven"] },
+          { "name": "Sidra", "def": "Manzana fermentada, ácida y viva.", "refs": ["Sidra natural"] }
+        ]
+      },
+      {
+        "name": "Otros / Off-notes",
+        "color": "#64748b",
+        "children": [
+          { "name": "Ahumado", "def": "Humo, brasas o ceniza perceptible.", "refs": ["Nuez ahumada"] },
+          { "name": "Quemado", "def": "Carbonizado, amargor agresivo y seco.", "refs": ["Pan quemado"] },
+          { "name": "Caucho", "def": "Goma, sulfuro leve; sensación pesada.", "refs": ["Goma elástica"] },
+          { "name": "Papel/cartón", "def": "Seco, plano, celulósico.", "refs": ["Cartón"] }
+        ]
+      }
+    ]
+  }

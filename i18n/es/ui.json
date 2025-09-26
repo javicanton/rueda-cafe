@@ -1,0 +1,10 @@
+{
+    "title": "Rueda de sabores del café",
+    "subtitle": "Haz clic en un arco para ver su ficha. Doble clic para centrar/zoom.",
+    "legend": "Interacción: <b>clic</b> ver ficha · <b>doble clic</b> zoom",
+    "searchPlaceholder": "Buscar descriptor… (p. ej., ‘cítrico’, ‘miel’)",
+    "results": "Resultados",
+    "selectPrompt": "Selecciona un descriptor",
+    "defPlaceholder": "Aquí aparecerá la definición y referencias sensoriales.",
+    "langLabel": "Idioma:"
+  }

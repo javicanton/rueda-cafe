@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rueda de sabores del café — Interactiva (multilenguaje)</title>
+<meta name="description" content="Rueda de sabores del café conmutando idiomas (ES/EN). Datos y traducciones externas en JSON para facilitar ampliaciones." />
+<style>
+  :root {
+    --bg: #0e0f11; --fg: #e9ecef; --muted: #9aa0a6; --card: #17191c; --accent: #7dd3fc;
+  }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans"; }
+  .wrap { display: grid; grid-template-columns: 1fr 360px; gap: 16px; padding: 16px; height: 100%; box-sizing: border-box; }
+  @media (max-width: 960px) { .wrap { grid-template-columns: 1fr; grid-auto-rows: min-content auto; } }
+  header { grid-column: 1/-1; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  header h1 { font-size: clamp(1.2rem, 2vw + 1rem, 1.8rem); margin: 0; letter-spacing: .3px; }
+  header .meta { color: var(--muted); font-size: .95rem; }
+  .controls { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .select { background: #111316; color: var(--fg); border: 1px solid #2a2e33; border-radius: 12px; padding: 8px 10px; }
+  .viz { background: var(--card); border-radius: 16px; position: relative; display: grid; place-items: center; min-height: 520px; }
+  .panel { background: var(--card); border-radius: 16px; padding: 16px; display: grid; gap: 10px; align-content: start; }
+  .search { display: flex; gap: 8px; }
+  .search input { flex: 1; padding: 10px 12px; border-radius: 12px; border: 1px solid #2a2e33; background: #111316; color: var(--fg); }
+  .badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #21252b; color: var(--muted); }
+  .attr { display: grid; gap: 6px; }
+  .attr h2 { font-size: 1.1rem; margin: 0; }
+  .attr small { color: var(--muted); }
+  .list { display: grid; gap: 6px; max-height: 36vh; overflow: auto; }
+  .list a { color: var(--fg); text-decoration: none; padding: 6px 8px; border-radius: 10px; display: block; border: 1px solid transparent; }
+  .list a:hover { background: #15181c; border-color: #30353b; }
+  .credits { color: var(--muted); font-size: .85rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .legend { position: absolute; left: 12px; bottom: 12px; background: rgba(0,0,0,.35); backdrop-filter: blur(6px); padding: 6px 8px; border-radius: 10px; font-size: .8rem; color: #dbe2ea; }
+  .legend b { color: #fff; }
+  .spinner { width: 20px; height: 20px; border: 3px solid #2a2e33; border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1 id="title">Rueda de sabores del café <span class="badge" id="badge">multilenguaje</span></h1>
+      <div class="meta" id="subtitle">Haz clic en un arco para ver su ficha. Doble clic para centrar/zoom.</div>
+      <div class="controls">
+        <label for="lang" id="langLabel">Idioma:</label>
+        <select id="lang" class="select" aria-label="Selector de idioma">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </header>
+
+    <section class="viz" aria-label="Rueda de sabores">
+      <svg id="wheel" width="100%" height="100%" viewBox="0 0 800 800" role="graphics-document" aria-describedby="desc"></svg>
+      <p id="desc" class="sr-only">Visualización de tipo sunburst que organiza descriptores sensoriales de café desde categorías generales en el centro a específicas en el exterior.</p>
+      <div class="legend" id="legend">Interacción: <b>clic</b> ver ficha · <b>doble clic</b> zoom</div>
+    </section>
+
+    <aside class="panel" aria-label="Ficha del descriptor">
+      <div class="search" role="search">
+        <input id="q" type="search" placeholder="Buscar descriptor…" aria-label="Buscar descriptor" />
+        <div id="loading" class="spinner" style="display:none" aria-hidden="true"></div>
+      </div>
+      <div class="attr">
+        <h2 id="attr-name">Selecciona un descriptor</h2>
+        <small id="attr-path">—</small>
+        <div id="attr-def" class="credits">Aquí aparecerá la definición y referencias sensoriales.</div>
+      </div>
+      <div>
+        <div class="badge" id="resultsBadge">Resultados</div>
+        <nav id="results" class="list" aria-label="Resultados de búsqueda"></nav>
+      </div>
+      <div class="credits" id="credits">
+        <p><strong>Aviso</strong>: este componente usa datos externos en JSON por idioma (i18n). El diseño es original y no replica pósters oficiales.</p>
+        <p>Desarrollo: D3.js. Accesibilidad con teclado: Tab ⇥ para recorrer, Intro ↵ para activar, Esc para salir del foco del SVG.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- D3.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script>
+  // =========================
+  // Configuración i18n
+  // Estructura de archivos esperada (carpetas sugeridas):
+  // /i18n/es/ui.json        -> cadenas de interfaz
+  // /i18n/es/flavors.json   -> datos jerárquicos de la rueda
+  // /i18n/en/ui.json
+  // /i18n/en/flavors.json
+  // =========================
+
+  const UI_DEFAULT = {
+    es: {
+      title: "Rueda de sabores del café",
+      subtitle: "Haz clic en un arco para ver su ficha. Doble clic para centrar/zoom.",
+      legend: "Interacción: <b>clic</b> ver ficha · <b>doble clic</b> zoom",
+      searchPlaceholder: "Buscar descriptor… (p. ej., ‘cítrico’, ‘miel’)",
+      results: "Resultados",
+      selectPrompt: "Selecciona un descriptor",
+      defPlaceholder: "Aquí aparecerá la definición y referencias sensoriales.",
+      langLabel: "Idioma:"
+    },
+    en: {
+      title: "Coffee Flavor Wheel",
+      subtitle: "Click a arc to view its card. Double click to center/zoom.",
+      legend: "Interaction: <b>click</b> view card · <b>double click</b> zoom",
+      searchPlaceholder: "Search descriptor… (e.g., ‘citrus’, ‘honey’)",
+      results: "Results",
+      selectPrompt: "Select a descriptor",
+      defPlaceholder: "Definition and sensory references will appear here.",
+      langLabel: "Language:"
+    }
+  };
+
+  const params = new URLSearchParams(location.search);
+  const langSelect = document.getElementById('lang');
+  const initialLang = (params.get('lang') || navigator.language.slice(0,2) || 'es').toLowerCase();
+  langSelect.value = ['es','en'].includes(initialLang) ? initialLang : 'es';
+
+  // Elementos UI
+  const $title = document.getElementById('title');
+  const $subtitle = document.getElementById('subtitle');
+  const $legend = document.getElementById('legend');
+  const $q = document.getElementById('q');
+  const $loading = document.getElementById('loading');
+  const $resultsBadge = document.getElementById('resultsBadge');
+  const $attrName = document.getElementById('attr-name');
+  const $attrPath = document.getElementById('attr-path');
+  const $attrDef = document.getElementById('attr-def');
+  const $results = document.getElementById('results');
+  const $langLabel = document.getElementById('langLabel');
+
+  // SVG globals
+  const svg = d3.select('#wheel');
+  const width = 800, height = 800, radius = Math.min(width, height) / 2 - 8;
+  const g = svg.append('g').attr('transform', `translate(${width/2},${height/2})`);
+
+  let root, path, label, index = [], currentData = null, currentUI = UI_DEFAULT.es;
+
+  function showLoading(v){ $loading.style.display = v ? 'inline-block' : 'none'; }
+
+  async function loadLang(lang){
+    showLoading(true);
+    // Cargar UI
+    try {
+      const uiRes = await fetch(`i18n/${lang}/ui.json`, { cache: 'no-store' });
+      currentUI = (uiRes.ok ? await uiRes.json() : UI_DEFAULT[lang]) || UI_DEFAULT[lang];
+    } catch(e) { currentUI = UI_DEFAULT[lang] || UI_DEFAULT.es; }
+    applyUI(currentUI);
+
+    // Cargar datos
+    try {
+      const dataRes = await fetch(`i18n/${lang}/flavors.json`, { cache: 'no-store' });
+      if(!dataRes.ok) throw new Error('No data');
+      const data = await dataRes.json();
+      currentData = data;
+      render(data);
+    } catch(e){
+      // Fallback a un dataset mínimo si no existen los JSON aún
+      currentData = fallbackData(lang);
+      render(currentData);
+    } finally { showLoading(false); }
+  }
+
+  function applyUI(ui){
+    $title.innerHTML = `${ui.title} <span class="badge">i18n</span>`;
+    $subtitle.textContent = ui.subtitle;
+    $legend.innerHTML = ui.legend;
+    $q.placeholder = ui.searchPlaceholder;
+    $resultsBadge.textContent = ui.results;
+    $attrName.textContent = ui.selectPrompt;
+    $attrPath.textContent = '—';
+    $attrDef.textContent = ui.defPlaceholder;
+    $langLabel.textContent = ui.langLabel;
+    document.documentElement.lang = (langSelect.value || 'es');
+  }
+
+  function fallbackData(lang){
+    const L = (k) => (lang === 'en' ? {
+      root: 'Coffee flavors', sweet: 'Sweet aromas', caramel: 'Caramel', caramelDef:'Caramelized sugar; sweet toasted notes.',
+      fruits: 'Fruity', citrus: 'Citrus', lemon: 'Lemon', lemonDef: 'Bright, fresh acidity typical of lemon.',
+      spices: 'Spices', cinnamon: 'Cinnamon', cinnamonDef: 'Warm, sweet, spicy aroma.'
+    } : {
+      root: 'Sabores del café', sweet: 'Aromas dulces', caramel: 'Caramelo', caramelDef:'Recuerda al azúcar caramelizado; notas tostadas dulces.',
+      fruits: 'Frutales', citrus: 'Cítricos', lemon: 'Limón', lemonDef: 'Acidez brillante, fresca, propia del limón.',
+      spices: 'Especias', cinnamon: 'Canela', cinnamonDef: 'Aroma cálido, dulce y especiado.'
+    })[k];
+
+    return { name: L('root'), children: [
+      { name: L('sweet'), color:'#f59e0b', children:[ { name: L('caramel'), def: L('caramelDef'), color:'#fbbf24' } ] },
+      { name: L('fruits'), color:'#10b981', children:[ { name: L('citrus'), color:'#34d399', children:[ { name: L('lemon'), def: L('lemonDef') } ] } ] },
+      { name: L('spices'), color:'#ef4444', children:[ { name: L('cinnamon'), def: L('cinnamonDef') } ] }
+    ]};
+  }
+
+  function render(data){
+    g.selectAll('*').remove(); // limpiar
+    const partition = d3.partition().size([2*Math.PI, radius]);
+    root = d3.hierarchy(data).sum(d => d.children ? 0 : 1).sort((a,b)=>d3.ascending(a.data.name,b.data.name));
+    partition(root);
+
+    const arc = d3.arc()
+      .startAngle(d=>d.x0).endAngle(d=>d.x1)
+      .innerRadius(d=>d.y0 + (d.depth===0?0:1))
+      .outerRadius(d=>d.y1 - 1);
+
+    const defaultColors = d3.scaleOrdinal().range([
+      '#f59e0b','#10b981','#ef4444','#a855f7','#06b6d4','#64748b','#84cc16','#eab308','#ec4899','#22c55e','#3b82f6','#14b8a6'
+    ]);
+
+    path = g.selectAll('path')
+      .data(root.descendants().filter(d=>d.depth))
+      .enter().append('path')
+      .attr('d', arc)
+      .attr('fill', d => d.data.color || defaultColors((d.children?d:d.parent).data.name))
+      .attr('fill-opacity', d => arcVisible(d)?1:0)
+      .attr('pointer-events', d => arcVisible(d)?'auto':'none')
+      .attr('tabindex', 0)
+      .attr('role', 'button')
+      .attr('aria-label', d => `${currentUI.selectPrompt}: ${d.data.name}`)
+      .on('click', (e,d)=>selectAttr(d))
+      .on('dblclick', (e,d)=>zoomTo(d))
+      .on('keydown', (e,d)=>{ if(e.key==='Enter') selectAttr(d); });
+
+    label = g.append('g').attr('pointer-events','none').attr('text-anchor','middle').style('user-select','none')
+      .selectAll('text')
+      .data(root.descendants().filter(d=>d.depth && (d.x1-d.x0)>0.015))
+      .enter().append('text')
+      .attr('transform', d=>labelTransform(d))
+      .attr('dy','0.32em')
+      .style('font-size', d=>d.children?'12px':'11px')
+      .style('fill','#eef2f7')
+      .text(d=>d.data.name);
+
+    function labelTransform(d){
+      const x=((d.x0+d.x1)/2)*180/Math.PI; const y=(d.y0+d.y1)/2; return `rotate(${x-90}) translate(${y},0) rotate(${x<180?0:180})`;
+    }
+    function arcVisible(d){ return d.y1 <= radius && d.y0 >= 0 && d.x1>d.x0; }
+
+    function zoomTo(p){
+      const k = radius / (p.y1 - p.y0); const tx = - (p.x0 + p.x1) / 2;
+      const newArc = d3.arc()
+        .startAngle(d => (d.x0 + tx)).endAngle(d => (d.x1 + tx))
+        .innerRadius(d => (d.y0 - p.y0)*k).outerRadius(d => Math.min(radius,(d.y1 - p.y0)*k));
+      path.transition().duration(600).attr('d', newArc);
+      label.transition().duration(600).attr('transform', d => {
+        const x = ((d.x0+tx + d.x1+tx)/2)*180/Math.PI; const y = ((d.y0 - p.y0)*k + (d.y1 - p.y0)*k)/2; return `rotate(${x-90}) translate(${y},0) rotate(${x<180?0:180})`;
+      });
+    }
+
+    // Índice de búsqueda
+    index = []; root.each(d=>{ if(!d.children) index.push({ key: d.data.name.toLowerCase(), ref: d }); });
+
+    // Preselección
+    const firstLeaf = root.descendants().find(d=>!d.children); if(firstLeaf) selectAttr(firstLeaf);
+  }
+
+  // Panel lateral
+  function breadcrumb(node){ return node.ancestors().reverse().map(n=>n.data.name).join(' › '); }
+  function selectAttr(node){
+    $attrName.textContent = node.data.name;
+    $attrPath.textContent = breadcrumb(node);
+    const def = node.data.def || '—';
+    const refs = node.data.refs ? ` · ${Array.isArray(node.data.refs)?node.data.refs.join(', '):node.data.refs}` : '';
+    $attrDef.textContent = `${def}${refs}`;
+  }
+
+  // Búsqueda
+  $q.addEventListener('input', () => {
+    const term = $q.value.trim().toLowerCase(); $results.innerHTML = ''; if(!term) return;
+    index.filter(x=>x.key.includes(term)).slice(0,50).forEach(x=>{
+      const a=document.createElement('a'); a.href='#'; a.textContent=breadcrumb(x.ref);
+      a.addEventListener('click',(e)=>{ e.preventDefault(); selectAttr(x.ref); }); $results.appendChild(a);
+    });
+  });
+
+  // Cambio de idioma
+  langSelect.addEventListener('change', () => {
+    const lang = langSelect.value; const url = new URL(location.href); url.searchParams.set('lang', lang); history.replaceState({}, '', url);
+    loadLang(lang);
+  });
+
+  // Inicialización
+  loadLang(langSelect.value);
+
+  // =========================
+  // Esquema JSON esperado (ejemplos):
+  // --- i18n/es/ui.json ---
+  // {
+  //   "title": "Rueda de sabores del café",
+  //   "subtitle": "Haz clic en un arco para ver su ficha. Doble clic para centrar/zoom.",
+  //   "legend": "Interacción: <b>clic</b> ver ficha · <b>doble clic</b> zoom",
+  //   "searchPlaceholder": "Buscar descriptor… (p. ej., ‘cítrico’, ‘miel’)",
+  //   "results": "Resultados",
+  //   "selectPrompt": "Selecciona un descriptor",
+  //   "defPlaceholder": "Aquí aparecerá la definición y referencias sensoriales.",
+  //   "langLabel": "Idioma:"
+  // }
+  // --- i18n/en/ui.json ---
+  // { "title": "Coffee Flavor Wheel", "subtitle": "Click a arc to view its card. Double click to center/zoom.", ... }
+  // --- i18n/es/flavors.json --- (jerárquico)
+  // { "name": "Sabores del café", "children": [ { "name":"Aromas dulces", "children":[ {"name":"Caramelo", "def":"…", "refs":["Azúcar caramelizado" ]} ] } ] }
+  // --- i18n/en/flavors.json --- igual estructura con nombres/defs en inglés
+  // =========================
+  </script>
+</body>
+</html>
