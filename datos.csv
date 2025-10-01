@@ -1,0 +1,75 @@
+nivel1,nivel2,nivel3,color
+Frutal,Berry,Blackberry,#e63946
+Frutal,Berry,Raspberry,#e63946
+Frutal,Berry,Blueberry,#e63946
+Frutal,Berry,Strawberry,#e63946
+Frutal,Dried Fruit,Raisin,#d62828
+Frutal,Dried Fruit,Prune,#d62828
+Frutal,Other Fruit,Coconut,#f77f00
+Frutal,Other Fruit,Cherry,#f77f00
+Frutal,Other Fruit,Pomegranate,#f77f00
+Frutal,Other Fruit,Pineapple,#f77f00
+Frutal,Other Fruit,Grape,#f77f00
+Frutal,Other Fruit,Apple,#f77f00
+Frutal,Other Fruit,Peach,#f77f00
+Frutal,Other Fruit,Pear,#f77f00
+Frutal,Citrus Fruit,Grapefruit,#fcbf49
+Frutal,Citrus Fruit,Orange,#fcbf49
+Frutal,Citrus Fruit,Lemon,#fcbf49
+Frutal,Citrus Fruit,Lime,#fcbf49
+Dulce,Brown Sugar,Molasses,#d4a373
+Dulce,Brown Sugar,Maple Syrup,#d4a373
+Dulce,Brown Sugar,Caramelized,#d4a373
+Dulce,Brown Sugar,Honey,#d4a373
+Dulce,Vanilla,Vanilla,#c9a959
+Dulce,Vanillin,Vanillin,#c9a959
+Dulce,Overall Sweet,Overall Sweet,#dda15e
+Dulce,Sweet Aromatics,Overall Sweet,#dda15e
+Floral,Black Tea,Black Tea,#e07a5f
+Floral,Floral,Chamomile,#d64550
+Floral,Floral,Rose,#d64550
+Floral,Floral,Jasmine,#d64550
+Especias,Pungent,Pepper,#9d4edd
+Especias,Pungent,Brown Spice,#9d4edd
+Especias,Brown Spice,Cinnamon,#7b2cbf
+Especias,Brown Spice,Nutmeg,#7b2cbf
+Especias,Brown Spice,Clove,#7b2cbf
+Nueces/Cacao,Nutty,Peanuts,#8d6e63
+Nueces/Cacao,Nutty,Hazelnut,#8d6e63
+Nueces/Cacao,Nutty,Almond,#8d6e63
+Nueces/Cacao,Cocoa,Chocolate,#6d4c41
+Nueces/Cacao,Cocoa,Dark Chocolate,#6d4c41
+Tostado,Cereal,Grain,#a68a64
+Tostado,Cereal,Malt,#a68a64
+Tostado,Burnt,Acrid,#5a4a42
+Tostado,Burnt,Ashy,#5a4a42
+Tostado,Burnt,Smoky,#5a4a42
+Tostado,Burnt,Brown Roast,#5a4a42
+Tostado,Tobacco,Tobacco,#8b7355
+Tostado,Pipe Tobacco,Pipe Tobacco,#8b7355
+Verde/Vegetal,Olive Oil,Olive Oil,#84a98c
+Verde/Vegetal,Raw,Raw,#52796f
+Verde/Vegetal,Green Vegetative,Dark Green,#354f52
+Verde/Vegetal,Green Vegetative,Vegetative,#354f52
+Verde/Vegetal,Green Vegetative,Hay-Like,#354f52
+Verde/Vegetal,Green Vegetative,Herb-Like,#354f52
+Verde/Vegetal,Beany,Beany,#52796f
+Agrio/Fermentado,Sour,Sour,#99d98c
+Agrio/Fermentado,Alcohol/Fermented,Winey,#76c893
+Agrio/Fermentado,Alcohol/Fermented,Whiskey,#76c893
+Agrio/Fermentado,Alcohol/Fermented,Fermented,#76c893
+Agrio/Fermentado,Alcohol/Fermented,Overripe,#76c893
+Otros,Papery/Musty,Stale,#cbc0d3
+Otros,Papery/Musty,Cardboard,#cbc0d3
+Otros,Papery/Musty,Papery,#cbc0d3
+Otros,Papery/Musty,Woody,#cbc0d3
+Otros,Papery/Musty,Moldy/Damp,#cbc0d3
+Otros,Papery/Musty,Musty/Dusty,#cbc0d3
+Otros,Papery/Musty,Musty/Earthy,#cbc0d3
+Otros,Papery/Musty,Animalic,#cbc0d3
+Otros,Chemical,Bitter,#a7c4c2
+Otros,Chemical,Salty,#a7c4c2
+Otros,Chemical,Medicinal,#a7c4c2
+Otros,Chemical,Petroleum,#a7c4c2
+Otros,Chemical,Skunky,#a7c4c2
+Otros,Chemical,Rubber,#a7c4c2
